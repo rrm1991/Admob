@@ -1,3 +1,5 @@
+package com.rrm.adutils
+
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -30,6 +32,8 @@ class InterstitialManager
     private var interstitialId = "ca-app-pub-3940256099942544/1033173712" //AdMob testing interstitial
     private var adLoadTime = 0L
 
+    var logsEnabled = false
+
     fun setInterstitialId(id : String)
     {
         interstitialId = id
@@ -40,7 +44,9 @@ class InterstitialManager
         //Ad already loaded, notify activity
         if (isInterstitialReady())
         {
-            Log.i("InterstitialManager", "Ad Already Loaded")
+            if(logsEnabled)
+                Log.i("InterstitialManager", "Ad Already Loaded")
+
             adListener.onAdLoaded()
             return
         }
