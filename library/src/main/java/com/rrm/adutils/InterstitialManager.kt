@@ -12,14 +12,14 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import java.util.*
 
-class InterstitialManager
+public class InterstitialManager
 {
 
     companion object
     {
         private var instance : InterstitialManager? = null
 
-        fun getInstance() : InterstitialManager
+        public fun getInstance() : InterstitialManager
         {
             if(instance == null)
                 instance = InterstitialManager()
@@ -32,14 +32,14 @@ class InterstitialManager
     private var interstitialId = "ca-app-pub-3940256099942544/1033173712" //AdMob testing interstitial
     private var adLoadTime = 0L
 
-    var logsEnabled = false
+    public var logsEnabled = false
 
-    fun setInterstitialId(id : String)
+    public fun setInterstitialId(id : String)
     {
         interstitialId = id
     }
 
-    fun loadAd(context: Context, adListener: AdListener) {
+    public fun loadAd(context: Context, adListener: AdListener) {
 
         //Ad already loaded, notify activity
         if (isInterstitialReady())
@@ -75,11 +75,11 @@ class InterstitialManager
             })
     }
 
-    fun getAd(): InterstitialAd? {
+    public fun getAd(): InterstitialAd? {
         return interstitial
     }
 
-    fun showAd(activity: Activity?): Boolean {
+    public fun showAd(activity: Activity?): Boolean {
         if (isInterstitialReady()) {
             interstitial?.setImmersiveMode(true)
             interstitial?.show(activity!!)
@@ -96,7 +96,7 @@ class InterstitialManager
         return interstitial != null && System.currentTimeMillis() - adLoadTime < 4 * 60 * 60 * 1000
     }
 
-    fun getTestDeviceIds(): List<String> {
+    public fun getTestDeviceIds(): List<String> {
         val testDevices = ArrayList<String>()
         testDevices.add("5EAF28079191FBE4C63BEABFE625737D")
         testDevices.add("CD749F8CC1CD16365FD206D703391F1C")
