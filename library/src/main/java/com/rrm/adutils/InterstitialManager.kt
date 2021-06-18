@@ -19,12 +19,24 @@ public class InterstitialManager
     {
         private var instance : InterstitialManager? = null
 
-        public fun getInstance() : InterstitialManager
+        @JvmStatic
+        fun getInstance() : InterstitialManager
         {
             if(instance == null)
                 instance = InterstitialManager()
 
             return instance!!
+        }
+
+        @JvmStatic
+        fun getTestDeviceIds(): List<String> {
+            val testDevices = ArrayList<String>()
+            testDevices.add("5EAF28079191FBE4C63BEABFE625737D")
+            testDevices.add("CD749F8CC1CD16365FD206D703391F1C")
+            testDevices.add("A505B4D83FD648EB1F3B3DEDF149A082")
+            testDevices.add("6B0F04A6D6E27402E3D0606F3B6B4D1E")
+            testDevices.add("C5B02D630C4DF85E20E2E88D6F3C4EB3")
+            return testDevices
         }
     }
 
@@ -32,14 +44,14 @@ public class InterstitialManager
     private var interstitialId = "ca-app-pub-3940256099942544/1033173712" //AdMob testing interstitial
     private var adLoadTime = 0L
 
-    public var logsEnabled = false
+    var logsEnabled = false
 
-    public fun setInterstitialId(id : String)
+    fun setInterstitialId(id : String)
     {
         interstitialId = id
     }
 
-    public fun loadAd(context: Context, adListener: AdListener) {
+    fun loadAd(context: Context, adListener: AdListener) {
 
         //Ad already loaded, notify activity
         if (isInterstitialReady())
@@ -75,11 +87,11 @@ public class InterstitialManager
             })
     }
 
-    public fun getAd(): InterstitialAd? {
+    fun getAd(): InterstitialAd? {
         return interstitial
     }
 
-    public fun showAd(activity: Activity?): Boolean {
+    fun showAd(activity: Activity?): Boolean {
         if (isInterstitialReady()) {
             interstitial?.setImmersiveMode(true)
             interstitial?.show(activity!!)
@@ -95,15 +107,4 @@ public class InterstitialManager
     private fun isInterstitialReady(): Boolean {
         return interstitial != null && System.currentTimeMillis() - adLoadTime < 4 * 60 * 60 * 1000
     }
-
-    public fun getTestDeviceIds(): List<String> {
-        val testDevices = ArrayList<String>()
-        testDevices.add("5EAF28079191FBE4C63BEABFE625737D")
-        testDevices.add("CD749F8CC1CD16365FD206D703391F1C")
-        testDevices.add("A505B4D83FD648EB1F3B3DEDF149A082")
-        testDevices.add("6B0F04A6D6E27402E3D0606F3B6B4D1E")
-        testDevices.add("C5B02D630C4DF85E20E2E88D6F3C4EB3")
-        return testDevices
-    }
-
 }
