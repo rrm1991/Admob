@@ -43,6 +43,7 @@ public class InterstitialManager
     private var interstitial: InterstitialAd? = null
     private var interstitialId = "ca-app-pub-3940256099942544/1033173712" //AdMob testing interstitial
     private var adLoadTime = 0L
+    private var isLoadingAd = false
 
     var logsEnabled = false
 
@@ -63,7 +64,11 @@ public class InterstitialManager
             return
         }
 
+        if(isLoadingAd)
+            return
+
         //Interstitial creation and ad loading
+        isLoadingAd = true
         val extras = Bundle()
         extras.putString("max_ad_content_rating", "PG")
         val adRequestBuilder: AdRequest.Builder =
@@ -72,16 +77,21 @@ public class InterstitialManager
             context,
             interstitialId,
             adRequestBuilder.build(),
-            object : InterstitialAdLoadCallback() {
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+            object : InterstitialAdLoadCallback()
+            {
+                override fun onAdLoaded(interstitialAd: InterstitialAd)
+                {
                     super.onAdLoaded(interstitialAd)
+                    isLoadingAd = false
                     interstitial = interstitialAd
                     adLoadTime = System.currentTimeMillis()
                     adListener.onAdLoaded()
                 }
 
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                override fun onAdFailedToLoad(loadAdError: LoadAdError)
+                {
                     super.onAdFailedToLoad(loadAdError)
+                    isLoadingAd = false
                     adListener.onAdFailedToLoad(loadAdError)
                 }
             })
