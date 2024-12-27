@@ -11,10 +11,9 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
-public class InterstitialManager
-{
+class InterstitialManager {
     private var interstitial: InterstitialAd? = null
-    private var interstitialId = "ca-app-pub-3940256099942544/1033173712" //AdMob testing interstitial
+    private var interstitialId = "ca-app-pub-3940256099942544/1033173712" //AdMob test interstitial
     private var adLoadTime = 0L
     private var isLoadingAd = false
 
@@ -25,7 +24,6 @@ public class InterstitialManager
     }
 
     fun loadAd(context: Context, adListener: AdListener) {
-
         //Ad already loaded, notify activity
         if (isInterstitialReady())
         {
